@@ -1,8 +1,27 @@
 import { Film } from '../../types/film';
 
-function FilmCard({name, previewImage}: Film) {
+type FilmCardProps = Film & {
+  onMouseMove: (id: number) => void;
+  onMouseLeave: () => void;
+}
+
+function FilmCard({
+  name,
+  previewImage,
+  id,
+  onMouseMove,
+  onMouseLeave
+}: FilmCardProps) {
+  const handleMouseMove = () => {
+    onMouseMove(id);
+  };
+
   return (
-    <article className="small-film-card catalog__films-card">
+    <article
+      className="small-film-card catalog__films-card"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="small-film-card__image">
         <img
           src={previewImage}
