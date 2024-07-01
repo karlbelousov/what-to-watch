@@ -1,6 +1,6 @@
 import { Film } from '../../types/film';
 
-function SmallFilmCard({name, previewImage}: Film) {
+function FilmCard({name, previewImage}: Film) {
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
@@ -20,4 +20,4 @@ function SmallFilmCard({name, previewImage}: Film) {
   );
 }
 
-export default SmallFilmCard;
+export default FilmCard;
