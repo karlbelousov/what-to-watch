@@ -8,24 +8,21 @@ import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
+import { Film } from '../../types/film';
 
 
 type AppProps = {
-  filmsCount: number;
-  film: {
-    title: string;
-    genre: string;
-    year: number;
-  };
+  films: Film[];
+  promoFilm: Film;
 }
 
-function App({filmsCount, film}: AppProps): JSX.Element {
+function App({films, promoFilm}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage filmsCount={filmsCount} film={film} />}
+          element={<MainPage films={films} promoFilm={promoFilm} />}
         />
         <Route
           path={AppRoute.Login}

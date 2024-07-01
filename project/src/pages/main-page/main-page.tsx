@@ -1,16 +1,13 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import Logo from '../../components/logo/logo';
+import { Film } from '../../types/film';
 
 type MainPageProps = {
-  filmsCount: number;
-  film: {
-    title: string;
-    genre: string;
-    year: number;
-  };
+  films: Film[];
+  promoFilm: Film;
 }
 
-function MainPage({filmsCount, film}: MainPageProps): JSX.Element {
+function MainPage({films, promoFilm}: MainPageProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -50,10 +47,10 @@ function MainPage({filmsCount, film}: MainPageProps): JSX.Element {
               />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.title}</h2>
+              <h2 className="film-card__title">{promoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.year}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.released}</span>
               </p>
               <div className="film-card__buttons">
                 <button
@@ -135,7 +132,9 @@ function MainPage({filmsCount, film}: MainPageProps): JSX.Element {
             </li>
           </ul>
           <div className="catalog__films-list">
-            {Array.from({length: filmsCount}, (_value, index) => <SmallFilmCard key={index} />)}
+            {films.map((film) => (
+              <SmallFilmCard key={film.id} {...film} />
+            ))}
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">
