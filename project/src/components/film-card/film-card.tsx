@@ -27,22 +27,22 @@ function FilmCard({
       onMouseMove={() => handleMouseMove(id)}
       onMouseLeave={handleMouseLeave}
     >
-      {(activeFilm !== id) ? (
-        <div className="small-film-card__image">
+      <div className="small-film-card__image">
+        {(activeFilm !== id) ? (
           <img
             src={previewImage}
             alt={name}
             width={280}
             height={175}
           />
-        </div>
-      ) : (
-        <VideoPlayer
-          previewImage={previewImage}
-          previewVideoLink={previewVideoLink}
-          activeFilm={activeFilm}
-        />
-      )}
+        ) : (
+          <VideoPlayer
+            previewImage={previewImage}
+            previewVideoLink={previewVideoLink}
+            activeFilm={activeFilm}
+          />
+        )}
+      </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`${AppRoute.Film}/${id}`}>
           {name}
