@@ -15,11 +15,11 @@ function VideoPlayer({previewVideoLink, activeFilm, previewImage}: VideoPlayerPr
       return;
     }
 
-    videoRef.current?.addEventListener('loadeddata', () => setIsLoading(false));
-
     if (!isLoading && !activeFilm) {
       return;
     }
+
+    videoRef.current?.addEventListener('loadeddata', () => setIsLoading(false));
 
     const timer = setTimeout(() => {
       videoRef.current?.play();
@@ -34,6 +34,7 @@ function VideoPlayer({previewVideoLink, activeFilm, previewImage}: VideoPlayerPr
       src={previewVideoLink}
       poster={previewImage}
       ref={videoRef}
+      muted
     />
   );
 }
