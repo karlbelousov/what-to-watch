@@ -4,4 +4,5 @@ export type Film = {
   genre: string;
   released: number;
   id: number;
+  previewVideoLink: string;
 };
