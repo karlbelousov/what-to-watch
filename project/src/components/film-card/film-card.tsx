@@ -39,7 +39,6 @@ function FilmCard({
           <VideoPlayer
             previewImage={previewImage}
             previewVideoLink={previewVideoLink}
-            activeFilm={activeFilm}
           />
         )}
       </div>

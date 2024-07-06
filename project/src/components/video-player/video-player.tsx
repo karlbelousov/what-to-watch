@@ -3,19 +3,14 @@ import { useEffect, useRef, useState } from 'react';
 type VideoPlayerProps = {
   previewImage: string;
   previewVideoLink: string;
-  activeFilm: null | number;
 }
 
-function VideoPlayer({previewVideoLink, activeFilm, previewImage}: VideoPlayerProps) {
+function VideoPlayer({previewVideoLink, previewImage}: VideoPlayerProps) {
   const [isLoading, setIsLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (videoRef === null) {
-      return;
-    }
-
-    if (!isLoading && !activeFilm) {
+    if (videoRef.current === null) {
       return;
     }
 
@@ -26,7 +21,8 @@ function VideoPlayer({previewVideoLink, activeFilm, previewImage}: VideoPlayerPr
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [isLoading, activeFilm]);
+
+  }, [isLoading]);
 
   return (
     <video
