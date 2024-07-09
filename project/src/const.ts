@@ -14,3 +14,5 @@ export enum AuthorizationStatus {
 }
 
 export const STARS_COUNT = 10;
+
+export const SIMILAR_FILMS_COUNT = 4;

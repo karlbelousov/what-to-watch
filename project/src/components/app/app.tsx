@@ -38,7 +38,7 @@ function App({films, promoFilm}: AppProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Film}/:id`}
-          element={<FilmPage />}
+          element={<FilmPage similarFilms={films} />}
         />
         <Route
           path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
