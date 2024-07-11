@@ -7,13 +7,7 @@ type FilmCardListProps = {
 }
 
 function FilmCardList({isLikeThis = false}: FilmCardListProps) {
-  const activeGenre = useAppSelector((state) => state.genre);
   const films = useAppSelector((state) => state.films);
-
-  let filterFilms = films;
-  if (activeGenre !== ' All genres') {
-    filterFilms = films.filter((film) => film.genre === activeGenre);
-  }
 
   return (
     <div className="catalog__films-list">
@@ -22,7 +16,7 @@ function FilmCardList({isLikeThis = false}: FilmCardListProps) {
           key={film.id}
           {...film}
         />
-      )) : filterFilms.map((film) => (
+      )) : films.map((film) => (
         <FilmCard
           key={film.id}
           {...film}
