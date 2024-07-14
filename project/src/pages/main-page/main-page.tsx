@@ -1,5 +1,5 @@
 import FilmCardList from '../../components/film-card-list/fillm-card-list';
-import GenresList from '../../components/genres-item/genres-list';
+import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/film';
 
