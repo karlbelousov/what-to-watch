@@ -1,5 +1,6 @@
-import FilmCardList from '../../components/film-card-list/fillm-card-list';
+import FilmCard from '../../components/film-card/film-card';
 import Logo from '../../components/logo/logo';
+import { films } from '../../mocks/films';
 
 function MyListPage(): JSX.Element {
   return (
@@ -25,7 +26,11 @@ function MyListPage(): JSX.Element {
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <FilmCardList />
+        <div className="catalog__films-list">
+          {films.map((film) => (
+            <FilmCard key={film.id} {...film} />
+          ))}
+          </div>
       </section>
       <footer className="page-footer">
         <Logo />

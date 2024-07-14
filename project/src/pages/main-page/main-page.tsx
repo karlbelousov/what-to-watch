@@ -1,4 +1,4 @@
-import FilmCardList from '../../components/film-card-list/fillm-card-list';
+import FilmCard from '../../components/film-card/film-card';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/film';
@@ -81,7 +81,11 @@ function MainPage({films, promoFilm}: MainPageProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList />
-          <FilmCardList />
+          <div className="catalog__films-list">
+            {films.map((film) => (
+              <FilmCard key={film.id} {...film} />
+            ))}
+          </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">
               Show more

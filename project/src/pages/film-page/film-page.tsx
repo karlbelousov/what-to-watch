@@ -5,7 +5,8 @@ import Details from '../../components/details/details';
 import Reviews from '../../components/reviews/reviews';
 import { Tab } from '../../types/tabs';
 import { Film } from '../../types/film';
-import FilmCardList from '../../components/film-card-list/fillm-card-list';
+import FilmCard from '../../components/film-card/film-card';
+import { SIMILAR_FILMS_COUNT } from '../../const';
 
 type FilmPageProps = {
   similarFilms: Film[];
@@ -106,7 +107,11 @@ function FilmPage({similarFilms}: FilmPageProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmCardList isLikeThis />
+          <div className="catalog__films-list">
+            {similarFilms.slice(0, SIMILAR_FILMS_COUNT).map((film) => (
+              <FilmCard key={film.id} {...film} />
+            ))}
+          </div>
         </section>
         <footer className="page-footer">
           <Logo />
