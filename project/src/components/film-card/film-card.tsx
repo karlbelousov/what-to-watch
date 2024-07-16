@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Film } from '../../types/film';
 import { AppRoute } from '../../const';
 import VideoPlayer from '../video-player/video-player';
+import { useAppDispatch } from '../../hooks';
+import { resetCountFilms } from '../../store/action';
 
 
 function FilmCard({
@@ -12,6 +14,7 @@ function FilmCard({
   previewVideoLink,
 }: Film) {
   const [activeFilm, setActiveFilm] = useState<number | null>(null);
+  const dispatch = useAppDispatch();
 
   const handleMouseMove = (filmId: number) => {
     setActiveFilm(filmId);
@@ -19,6 +22,10 @@ function FilmCard({
 
   const handleMouseLeave = () => {
     setActiveFilm(null);
+  };
+
+  const handleCardTitleClick = () => {
+    dispatch(resetCountFilms());
   };
 
   return (
@@ -42,7 +49,7 @@ function FilmCard({
           />
         )}
       </div>
-      <h3 className="small-film-card__title">
+      <h3 className="small-film-card__title" onClick={handleCardTitleClick}>
         <Link className="small-film-card__link" to={`${AppRoute.Film}/${id}`}>
           {name}
         </Link>
