@@ -1,11 +1,13 @@
 import FilmLLst from '../../components/film-list/film-list';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
+import ShowMore from '../../components/show-more/show-more';
 import { useAppSelector } from '../../hooks';
 import { promoFilm } from '../../mocks/films';
 
 function MainPage() {
   const activeGenre = useAppSelector((state) => state.genre);
+  const countFilms = useAppSelector((state) => state.countFilms);
   let films = useAppSelector((state) => state.films);
 
   if (activeGenre !== 'All genres') {
@@ -84,12 +86,8 @@ function MainPage() {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList activeGenre={activeGenre} />
-          <FilmLLst films={films} />
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
+          <FilmLLst films={films.slice(0, countFilms)} />
+          {(films.length > countFilms) && <ShowMore />}
         </section>
         <footer className="page-footer">
           <Logo />
