@@ -1,14 +1,17 @@
 import FilmLLst from '../../components/film-list/film-list';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
-import { Film } from '../../types/film';
+import { useAppSelector } from '../../hooks';
+import { promoFilm } from '../../mocks/films';
 
-type MainPageProps = {
-  films: Film[];
-  promoFilm: Film;
-}
+function MainPage() {
+  const activeGenre = useAppSelector((state) => state.genre);
+  let films = useAppSelector((state) => state.films);
 
-function MainPage({films, promoFilm}: MainPageProps): JSX.Element {
+  if (activeGenre !== 'All genres') {
+    films = films.filter((film) => film.genre === activeGenre);
+  }
+
   return (
     <>
       <section className="film-card">
@@ -80,7 +83,7 @@ function MainPage({films, promoFilm}: MainPageProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList />
+          <GenresList activeGenre={activeGenre} />
           <FilmLLst films={films} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">

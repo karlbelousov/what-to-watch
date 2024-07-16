@@ -1,11 +1,14 @@
 import { genres } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch} from '../../hooks';
 import { setGenre } from '../../store/action';
 import { Genre } from '../../types/genre';
 import GenreItem from '../genre-item/genre-item';
 
-function GenresList() {
-  const activeGenre = useAppSelector((state) => state.genre);
+type GenresListProps = {
+  activeGenre: Genre;
+}
+
+function GenresList({activeGenre}: GenresListProps) {
   const dispatch = useAppDispatch();
 
   const handleClick = (genre: Genre) => {
