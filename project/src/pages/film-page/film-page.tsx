@@ -4,14 +4,10 @@ import Overview from '../../components/overview/overview';
 import Details from '../../components/details/details';
 import Reviews from '../../components/reviews/reviews';
 import { Tab } from '../../types/tabs';
-import { Film } from '../../types/film';
 import FilmLLst from '../../components/film-list/film-list';
+import { films } from '../../mocks/films';
 
-type FilmPageProps = {
-  similarFilms: Film[];
-}
-
-function FilmPage({similarFilms}: FilmPageProps): JSX.Element {
+function FilmPage() {
   const tabs: Tab[] = [
     {
       title: 'Overview',
@@ -106,7 +102,7 @@ function FilmPage({similarFilms}: FilmPageProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmLLst films={similarFilms.slice(0, 4)} />
+          <FilmLLst films={films.slice(0, 4)} />
         </section>
         <footer className="page-footer">
           <Logo />

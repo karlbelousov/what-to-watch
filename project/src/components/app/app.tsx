@@ -8,21 +8,14 @@ import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
-import { Film } from '../../types/film';
 
-
-type AppProps = {
-  films: Film[];
-  promoFilm: Film;
-}
-
-function App({films, promoFilm}: AppProps): JSX.Element {
+function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage films={films} promoFilm={promoFilm} />}
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.Login}
@@ -38,7 +31,7 @@ function App({films, promoFilm}: AppProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Film}/:id`}
-          element={<FilmPage similarFilms={films} />}
+          element={<FilmPage />}
         />
         <Route
           path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
