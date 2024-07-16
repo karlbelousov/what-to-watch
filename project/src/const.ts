@@ -15,6 +15,4 @@ export enum AuthorizationStatus {
 
 export const STARS_COUNT = 10;
 
-export const SIMILAR_FILMS_COUNT = 4;
-
 export const genres = [' All genres', 'Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'] as const;
