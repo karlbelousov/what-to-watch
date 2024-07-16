@@ -73,5 +73,29 @@ export const films: Film[] = [
     released: 2014,
     id: 8,
     previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+  },
+  {
+    name: 'Johnny English',
+    previewImage: 'img/johnny-english.jpg',
+    genre: 'Documentary',
+    released: 2014,
+    id: 8,
+    previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+  },
+  {
+    name: 'Johnny English',
+    previewImage: 'img/johnny-english.jpg',
+    genre: 'Documentary',
+    released: 2014,
+    id: 8,
+    previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+  },
+  {
+    name: 'Johnny English',
+    previewImage: 'img/johnny-english.jpg',
+    genre: 'Documentary',
+    released: 2014,
+    id: 8,
+    previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
   }
 ];
