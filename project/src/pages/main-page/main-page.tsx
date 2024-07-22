@@ -3,7 +3,6 @@ import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import ShowMore from '../../components/show-more/show-more';
 import { useAppSelector } from '../../hooks';
-import { promoFilm } from '../../mocks/films';
 
 function MainPage() {
   const activeGenre = useAppSelector((state) => state.genre);
@@ -53,10 +52,10 @@ function MainPage() {
               />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilm.name}</h2>
+              <h2 className="film-card__title">Title</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilm.genre}</span>
-                <span className="film-card__year">{promoFilm.released}</span>
+                <span className="film-card__genre">Genre</span>
+                <span className="film-card__year">1920</span>
               </p>
               <div className="film-card__buttons">
                 <button

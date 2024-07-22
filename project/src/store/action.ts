@@ -1,8 +1,13 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Genre } from '../types/genre';
-import { Film } from '../types/film';
 
-export const setGenre = createAction<Genre>('genre/set');
-export const setFilms = createAction<Film[]>('films/set');
-export const incCountFilms = createAction('count-films/inc');
-export const resetCountFilms = createAction('count-films/reset');
+export const Action = {
+  SET_GENRE: 'genre/set',
+  FETCH_FILMS: 'films/fetch',
+  INC_COUNT_FILM: 'count-films/inc',
+  RESET_COUNT_FILM: 'count-films/reset'
+};
+
+export const setGenre = createAction<Genre>(Action.SET_GENRE);
+export const incCountFilms = createAction(Action.INC_COUNT_FILM);
+export const resetCountFilms = createAction(Action.RESET_COUNT_FILM);

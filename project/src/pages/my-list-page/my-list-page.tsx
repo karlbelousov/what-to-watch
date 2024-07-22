@@ -1,8 +1,10 @@
 import FilmLLst from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
-import { films } from '../../mocks/films';
+import { useAppSelector } from '../../hooks';
 
 function MyListPage(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

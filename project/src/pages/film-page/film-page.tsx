@@ -4,8 +4,7 @@ import Overview from '../../components/overview/overview';
 import Details from '../../components/details/details';
 import Reviews from '../../components/reviews/reviews';
 import { Tab } from '../../types/tabs';
-import FilmLLst from '../../components/film-list/film-list';
-import { films } from '../../mocks/films';
+// import FilmLLst from '../../components/film-list/film-list';
 
 function FilmPage() {
   const tabs: Tab[] = [
@@ -102,7 +101,7 @@ function FilmPage() {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmLLst films={films.slice(0, 4)} />
+          {/* <FilmLLst films={films.slice(0, 4)} /> */}
         </section>
         <footer className="page-footer">
           <Logo />
