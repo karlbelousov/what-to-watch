@@ -1,14 +1,37 @@
+import { ChangeEvent, FormEvent, useState} from 'react';
+import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
+import { useAppDispatch } from '../../hooks';
+import { loginUser } from '../../store/action';
 
 function LoginPage(): JSX.Element {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useAppDispatch();
+
+  const handleLoginChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (email && password) {
+      dispatch(loginUser({
+        email,
+        password
+      }));
+    }
+  };
+
   return (
     <div className="user-page">
-      <header className="page-header user-page__head">
-        <Logo />
-        <h1 className="page-title user-page__title">Sign in</h1>
-      </header>
+      <Header />
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form action="#" className="sign-in__form" onSubmit={handleFormSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
@@ -17,6 +40,8 @@ function LoginPage(): JSX.Element {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                value={email}
+                onChange={handleLoginChange}
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -32,6 +57,8 @@ function LoginPage(): JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                value={password}
+                onChange={handlePasswordChange}
               />
               <label
                 className="sign-in__label visually-hidden"

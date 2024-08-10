@@ -14,7 +14,8 @@ export enum AuthorizationStatus {
 }
 
 export enum ApiRoute {
-  Films = '/films'
+  Films = '/films',
+  Login = '/login',
 }
 
 export const STARS_COUNT = 10;
