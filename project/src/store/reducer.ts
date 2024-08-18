@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, COUNT_FILMS, COUNT_FILMS_INC, genres } from '../const';
-import { Film } from '../types/film';
+import { Film, Review } from '../types/film';
 import { Genre } from '../types/genre';
-import { fetchFilms, fetchUserStatus, incCountFilms, loginUser, resetCountFilms, setGenre } from './action';
+import { fetchFilm, fetchFilms, fetchPromoFilm, fetchReviews, fetchSimilarFilms, fetchUserStatus, incCountFilms, loginUser, postReview, resetCountFilms, setGenre } from './action';
 import { User } from '../types/user';
 
 type State = {
@@ -12,6 +12,11 @@ type State = {
   isFilmsLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   user: User['avatarUrl'];
+  film: Film | null;
+  isFilmLoading: boolean;
+  similarFilms: Film[];
+  reviews: Review[];
+  promoFilm: Film | null;
 }
 
 const initialState: State = {
@@ -20,7 +25,12 @@ const initialState: State = {
   countFilms: COUNT_FILMS,
   isFilmsLoading: false,
   authorizationStatus: AuthorizationStatus.NoAuth,
-  user: ''
+  user: '',
+  film: null,
+  isFilmLoading: false,
+  similarFilms: [],
+  reviews: [],
+  promoFilm: null
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -54,6 +64,28 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loginUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.authorizationStatus = AuthorizationStatus.Auth;
+    })
+    .addCase(fetchFilm.pending, (state) => {
+      state.isFilmLoading = true;
+    })
+    .addCase(fetchFilm.fulfilled, (state, action) => {
+      state.film = action.payload;
+      state.isFilmLoading = false;
+    })
+    .addCase(fetchFilm.rejected, (state) => {
+      state.isFilmLoading = false;
+    })
+    .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
+      state.similarFilms = action.payload;
+    })
+    .addCase(fetchReviews.fulfilled, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(fetchPromoFilm.fulfilled, (state, action) => {
+      state.promoFilm = action.payload;
+    })
+    .addCase(postReview.fulfilled, (state, action) => {
+      state.reviews = action.payload;
     });
 });
 

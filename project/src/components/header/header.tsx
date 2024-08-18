@@ -2,14 +2,20 @@ import { Link } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { ReactNode } from 'react';
 
-function Header() {
+type HeaderProps = {
+  children?: ReactNode;
+}
+
+function Header({children}: HeaderProps) {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const user = useAppSelector((state) => state.user);
 
   return (
     <header className="page-header film-card__head">
       <Logo />
+      {children}
       <ul className="user-block">
         {authorizationStatus === AuthorizationStatus.Auth && (
           <li className="user-block__item">

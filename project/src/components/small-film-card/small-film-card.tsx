@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../hooks';
 import { resetCountFilms } from '../../store/action';
 
 
-function FilmCard({
+function SmallFilmCard({
   name,
   previewImage,
   id,
@@ -58,4 +58,4 @@ function FilmCard({
   );
 }
 
-export default FilmCard;
+export default SmallFilmCard;

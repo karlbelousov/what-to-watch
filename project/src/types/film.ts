@@ -1,3 +1,13 @@
+import { User } from "./user";
+
+export type Review = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: User
+}
+
 export type Film = {
   id: number;
   name: string;
@@ -17,3 +27,5 @@ export type Film = {
   released: number;
   isFavorite: boolean;
 };
+
+export type ReviewAuth = Pick<Review, 'comment' | 'rating'> & Pick<Film, 'id'>;

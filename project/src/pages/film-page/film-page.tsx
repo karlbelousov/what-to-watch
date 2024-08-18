@@ -1,25 +1,60 @@
 import Logo from '../../components/logo/logo';
-import Tabs from '../../components/tabs/tabs';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import Spinner from '../../components/spinner/spinner';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { fetchFilm, fetchReviews, fetchSimilarFilms } from '../../store/action';
+import FilmLLst from '../../components/film-list/film-list';
+import { Tab } from '../../types/tabs';
 import Overview from '../../components/overview/overview';
 import Details from '../../components/details/details';
 import Reviews from '../../components/reviews/reviews';
-import { Tab } from '../../types/tabs';
-// import FilmLLst from '../../components/film-list/film-list';
+import Tabs from '../../components/tabs/tabs';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import Header from '../../components/header/header';
 
 function FilmPage() {
+  const params = useParams();
+  const dispatch = useAppDispatch();
+  const isFilmLoading = useAppSelector((state) => state.isFilmLoading);
+  const film = useAppSelector((store) => store.film);
+  const similarFilms = useAppSelector((store) => store.similarFilms);
+  const reviews = useAppSelector((store) => store.reviews);
+  const authorisationStatus = useAppSelector((state) => state.authorizationStatus);
+
+  useEffect(() => {
+    const { id } = params;
+    if (id) {
+      const parseId = Number(id);
+      dispatch(fetchFilm(parseId));
+      dispatch(fetchSimilarFilms(parseId));
+      dispatch(fetchReviews(parseId));
+    }
+  }, [params, dispatch]);
+
+  if (isFilmLoading) {
+    return <Spinner />;
+  }
+
+  if (!film) {
+    return null;
+  }
+
+  const { name, genre, released, backgroundImage, posterImage, id } = film;
+
   const tabs: Tab[] = [
     {
       title: 'Overview',
-      content: <Overview />
+      content: <Overview {...film} />,
     },
     {
       title: 'Details',
-      content:  <Details />
+      content: <Details {...film} />,
     },
     {
       title: 'Reviews',
-      content: <Reviews />
-    }
+      content: <Reviews reviews={reviews} />,
+    },
   ];
 
   return (
@@ -27,36 +62,16 @@ function FilmPage() {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel"
-            />
+            <img src={backgroundImage} alt={name} />
           </div>
           <h1 className="visually-hidden">WTW</h1>
-          <header className="page-header film-card__head">
-            <Logo />
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img
-                    src="img/avatar.jpg"
-                    alt="User avatar"
-                    width={63}
-                    height={63}
-                  />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a href='/' className="user-block__link">Sign out</a>
-              </li>
-            </ul>
-          </header>
+          <Header />
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
               <div className="film-card__buttons">
                 <button
@@ -77,9 +92,11 @@ function FilmPage() {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">
-                  Add review
-                </a>
+                {authorisationStatus === AuthorizationStatus.Auth && (
+                  <Link to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`} className="btn film-card__button">
+                    Add review
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -88,7 +105,7 @@ function FilmPage() {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
+                src={posterImage}
                 alt="The Grand Budapest Hotel poster"
                 width={218}
                 height={327}
@@ -101,7 +118,7 @@ function FilmPage() {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          {/* <FilmLLst films={films.slice(0, 4)} /> */}
+          <FilmLLst films={similarFilms} />
         </section>
         <footer className="page-footer">
           <Logo />

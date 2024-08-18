@@ -5,6 +5,11 @@ export enum AppRoute {
   Film = '/films',
   AddReview ='/review',
   Player = '/player',
+  NotFound = '/404'
+}
+
+export enum HttpCode {
+  NotFound = 404
 }
 
 export enum AuthorizationStatus {
@@ -16,6 +21,8 @@ export enum AuthorizationStatus {
 export enum ApiRoute {
   Films = '/films',
   Login = '/login',
+  Comments = '/comments',
+  Promo = '/promo'
 }
 
 export const STARS_COUNT = 10;

@@ -1,9 +1,24 @@
-import { ChangeEvent, Fragment, useState } from 'react';
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 import { STARS_COUNT } from '../../const';
+import { ReviewAuth } from '../../types/film';
 
-function ReviewForm() {
+type ReviewFormProps = {
+  onSubmit: (formData: Omit<ReviewAuth, 'id'>) => void;
+}
+
+function ReviewForm({onSubmit}: ReviewFormProps) {
   const [text, setText] = useState('');
-  const [rating, setRating] = useState<number | null>(null);
+  const [rating, setRating] = useState<number>(0);
+
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit({
+      comment: text,
+      rating
+    });
+    setText('');
+    setRating(0);
+  };
 
   const handleTextareaChahge = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
@@ -14,7 +29,7 @@ function ReviewForm() {
   };
 
   return (
-    <form action="#" className="add-review__form">
+    <form action="#" className="add-review__form" onSubmit={handleFormSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {Array.from({length: STARS_COUNT}, (_,i) => (
@@ -45,7 +60,11 @@ function ReviewForm() {
           onChange={handleTextareaChahge}
         />
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">
+          <button
+            className="add-review__btn"
+            type="submit"
+            disabled={!(!!text && !!rating)}
+          >
             Post
           </button>
         </div>

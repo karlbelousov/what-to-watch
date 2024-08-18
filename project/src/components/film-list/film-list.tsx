@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import { Film } from '../../types/film';
-import FilmCard from '../film-card/film-card';
+import FilmCard from '../small-film-card/small-film-card';
 import Spinner from '../spinner/spinner';
 
 type FilmListProps = {
