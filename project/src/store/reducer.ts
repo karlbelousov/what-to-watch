@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, COUNT_FILMS, COUNT_FILMS_INC, genres } from '../const';
 import { Film, Review } from '../types/film';
 import { Genre } from '../types/genre';
-import { fetchFilm, fetchFilms, fetchPromoFilm, fetchReviews, fetchSimilarFilms, fetchUserStatus, incCountFilms, loginUser, postReview, resetCountFilms, setGenre } from './action';
+import { fetchFilm, fetchFilms, fetchPromoFilm, fetchReviews, fetchSimilarFilms, fetchUserStatus, incCountFilms, loginUser, logoutUser, postReview, resetCountFilms, setGenre } from './action';
 import { User } from '../types/user';
 
 type State = {
@@ -64,6 +64,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loginUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.authorizationStatus = AuthorizationStatus.Auth;
+    })
+    .addCase(logoutUser.fulfilled, (state) => {
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
     })
     .addCase(fetchFilm.pending, (state) => {
       state.isFilmLoading = true;

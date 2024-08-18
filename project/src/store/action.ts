@@ -4,7 +4,7 @@ import { Film, Review, ReviewAuth } from '../types/film';
 import { AxiosError, AxiosInstance } from 'axios';
 import { ApiRoute, AppRoute, HttpCode } from '../const';
 import { User, UserAuth } from '../types/user';
-import { saveToken } from '../services/token';
+import { dropToken, saveToken } from '../services/token';
 import { AppDispatch } from '../types/state';
 
 export const Action = {
@@ -19,6 +19,7 @@ export const Action = {
   RESET_COUNT_FILM: 'count-films/reset',
   FETCH_USER_STATUS: 'user/fetch-status',
   LOGIN_USER: 'user/login',
+  LOGOUT_USER: 'user/logout',
   REDIRECT_TO_ROUTE: 'user/redirect-to-route',
 };
 
@@ -101,4 +102,11 @@ export const loginUser = createAsyncThunk<UserAuth['email'], UserAuth, { extra: 
     saveToken(token);
     dispatch(redirectToRoute(AppRoute.Main));
     return avatarUrl;
+  });
+
+export const logoutUser = createAsyncThunk<void, undefined, { extra: AxiosInstance}>(
+  Action.LOGOUT_USER,
+  async (_arg, {extra: api}) => {
+    await api.delete(AppRoute.Logout);
+    dropToken();
   });

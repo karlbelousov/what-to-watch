@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ReactNode } from 'react';
+import { logoutUser } from '../../store/action';
 
 type HeaderProps = {
   children?: ReactNode;
@@ -11,6 +12,11 @@ type HeaderProps = {
 function Header({children}: HeaderProps) {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const user = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+
+  const handleLogoutUser = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <header className="page-header film-card__head">
@@ -30,9 +36,15 @@ function Header({children}: HeaderProps) {
           </li>
         )}
         <li className="user-block__item">
-          <Link to={AppRoute.Login} className="user-block__link">
-            {authorizationStatus === AuthorizationStatus.Auth ? 'Sign out' : 'Sign in'}
-          </Link>
+          {authorizationStatus === AuthorizationStatus.Auth ? (
+            <Link to={''} className="user-block__link" onClick={handleLogoutUser}>
+              Sign out
+            </Link>
+          ) : (
+            <Link to={AppRoute.Login} className="user-block__link">
+              Sign in
+            </Link>
+          )}
         </li>
       </ul>
     </header>
