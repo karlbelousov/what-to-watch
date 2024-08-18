@@ -37,9 +37,9 @@ function Header({children}: HeaderProps) {
         )}
         <li className="user-block__item">
           {authorizationStatus === AuthorizationStatus.Auth ? (
-            <Link to={''} className="user-block__link" onClick={handleLogoutUser}>
+            <button className="user-block__link" onClick={handleLogoutUser}>
               Sign out
-            </Link>
+            </button>
           ) : (
             <Link to={AppRoute.Login} className="user-block__link">
               Sign in
