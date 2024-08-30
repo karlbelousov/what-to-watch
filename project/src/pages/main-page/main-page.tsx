@@ -4,12 +4,14 @@ import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
 import ShowMore from '../../components/show-more/show-more';
 import { useAppSelector } from '../../hooks';
+import { getFilms, getPromoFilm } from '../../store/site-data/selectors';
+import { getCountFilms, getGenre } from '../../store/site-process/selectors';
 
 function MainPage() {
-  const activeGenre = useAppSelector((state) => state.genre);
-  const countFilms = useAppSelector((state) => state.countFilms);
-  let films = useAppSelector((state) => state.films);
-  const promoFilm = useAppSelector((state) => state.promoFilm);
+  const activeGenre = useAppSelector(getGenre);
+  const countFilms = useAppSelector(getCountFilms);
+  let films = useAppSelector(getFilms);
+  const promoFilm = useAppSelector(getPromoFilm);
 
   if (activeGenre !== 'All genres') {
     films = films.filter((film) => film.genre === activeGenre);

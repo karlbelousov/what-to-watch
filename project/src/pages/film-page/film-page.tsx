@@ -12,15 +12,17 @@ import Reviews from '../../components/reviews/reviews';
 import Tabs from '../../components/tabs/tabs';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Header from '../../components/header/header';
+import { getFilm, getIsFilmLoading, getReviews, getSimilarFims } from '../../store/site-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function FilmPage() {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const isFilmLoading = useAppSelector((state) => state.isFilmLoading);
-  const film = useAppSelector((store) => store.film);
-  const similarFilms = useAppSelector((store) => store.similarFilms);
-  const reviews = useAppSelector((store) => store.reviews);
-  const authorisationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isFilmLoading = useAppSelector(getIsFilmLoading);
+  const film = useAppSelector(getFilm);
+  const similarFilms = useAppSelector(getSimilarFims);
+  const reviews = useAppSelector(getReviews);
+  const authorisationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     const { id } = params;

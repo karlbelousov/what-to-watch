@@ -26,6 +26,12 @@ export enum ApiRoute {
   Promo = '/promo'
 }
 
+export enum StoreSlice {
+  SiteData = 'SITE_DATA',
+  SiteProcess = 'SITE_PROCESS',
+  UserProcess = 'USER_PROCESS',
+}
+
 export const STARS_COUNT = 10;
 export const COUNT_FILMS = 8;
 export const COUNT_FILMS_INC = 8;

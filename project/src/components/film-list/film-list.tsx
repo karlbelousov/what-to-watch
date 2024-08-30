@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../hooks';
+import { getIsFilmsLoading } from '../../store/site-data/selectors';
 import { Film } from '../../types/film';
 import FilmCard from '../small-film-card/small-film-card';
 import Spinner from '../spinner/spinner';
@@ -8,7 +9,7 @@ type FilmListProps = {
 }
 
 function FilmLLst({films}: FilmListProps) {
-  const isFilmsLoading = useAppSelector((state) => state.isFilmsLoading);
+  const isFilmsLoading = useAppSelector(getIsFilmsLoading);
 
   if (isFilmsLoading) {
     return <Spinner />;

@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from './reducer';
 import { createAPI } from '../services/api';
 import { fetchFilms, fetchPromoFilm, fetchUserStatus } from './action';
 import { history } from './middlewares/hisroty';
+import { rootReducer } from './root-reducer';
 
 const api = createAPI();
 
 export const store = configureStore({
-  reducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {

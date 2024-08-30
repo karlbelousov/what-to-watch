@@ -4,14 +4,15 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ReactNode } from 'react';
 import { logoutUser } from '../../store/action';
+import { getAuthorizationStatus, getUser } from '../../store/user-process/selectors';
 
 type HeaderProps = {
   children?: ReactNode;
 }
 
 function Header({children}: HeaderProps) {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const user = useAppSelector((state) => state.user);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
   const dispatch = useAppDispatch();
 
   const handleLogoutUser = () => {
@@ -37,9 +38,9 @@ function Header({children}: HeaderProps) {
         )}
         <li className="user-block__item">
           {authorizationStatus === AuthorizationStatus.Auth ? (
-            <button className="user-block__link" onClick={handleLogoutUser}>
+            <Link to={''} className="user-block__link" onClick={handleLogoutUser}>
               Sign out
-            </button>
+            </Link>
           ) : (
             <Link to={AppRoute.Login} className="user-block__link">
               Sign in

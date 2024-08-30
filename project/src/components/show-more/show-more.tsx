@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../hooks';
-import { incCountFilms } from '../../store/action';
+import { incCountFilms } from '../../store/site-process/site-process';
 
 function ShowMore() {
   const dispatch = useAppDispatch();

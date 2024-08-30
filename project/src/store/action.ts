@@ -1,5 +1,4 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { Genre } from '../types/genre';
 import { Film, Review, ReviewAuth } from '../types/film';
 import { AxiosError, AxiosInstance } from 'axios';
 import { ApiRoute, AppRoute, HttpCode } from '../const';
@@ -8,26 +7,19 @@ import { dropToken, saveToken } from '../services/token';
 import { AppDispatch } from '../types/state';
 
 export const Action = {
-  SET_GENRE: 'genre/set',
   FETCH_PROMO_FILM: 'films/tetch-promo-film',
   FETCH_FILMS: 'films/fetch',
   FETCH_FILM: 'film/fetch',
   FETCH_SIMILAR_FILMS: 'films/fetch-similar',
   FETCH_REWIEWS: 'film/fetch-rewiews',
   POST_REVIEW: 'review/post-review',
-  INC_COUNT_FILM: 'count-films/inc',
-  RESET_COUNT_FILM: 'count-films/reset',
   FETCH_USER_STATUS: 'user/fetch-status',
   LOGIN_USER: 'user/login',
   LOGOUT_USER: 'user/logout',
   REDIRECT_TO_ROUTE: 'user/redirect-to-route',
 };
 
-export const setGenre = createAction<Genre>(Action.SET_GENRE);
-export const incCountFilms = createAction(Action.INC_COUNT_FILM);
-export const resetCountFilms = createAction(Action.RESET_COUNT_FILM);
 export const redirectToRoute = createAction<AppRoute>(Action.REDIRECT_TO_ROUTE);
-
 export const fetchFilms = createAsyncThunk<Film[], undefined, { extra: AxiosInstance }>(
   Action.FETCH_FILMS,
   async (_, { extra: api }) => {

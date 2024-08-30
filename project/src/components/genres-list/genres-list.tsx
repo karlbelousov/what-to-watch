@@ -1,6 +1,7 @@
 import { genres } from '../../const';
 import { useAppDispatch} from '../../hooks';
-import { setGenre } from '../../store/action';
+import { setGenre } from '../../store/site-process/site-process';
+
 import { Genre } from '../../types/genre';
 import GenreItem from '../genre-item/genre-item';
 

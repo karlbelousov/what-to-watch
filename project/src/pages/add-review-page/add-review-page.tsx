@@ -7,12 +7,13 @@ import { fetchFilm, postReview } from '../../store/action';
 import Spinner from '../../components/spinner/spinner';
 import { AppRoute } from '../../const';
 import { ReviewAuth } from '../../types/film';
+import { getFilm, getIsFilmLoading } from '../../store/site-data/selectors';
 
 function AddReviewPage(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const isFilmLoading = useAppSelector((state) => state.isFilmLoading);
-  const film = useAppSelector((store) => store.film);
+  const isFilmLoading = useAppSelector(getIsFilmLoading);
+  const film = useAppSelector(getFilm);
 
   useEffect(() => {
     const { id } = params;

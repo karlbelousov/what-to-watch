@@ -4,7 +4,7 @@ import { Film } from '../../types/film';
 import { AppRoute } from '../../const';
 import VideoPlayer from '../video-player/video-player';
 import { useAppDispatch } from '../../hooks';
-import { resetCountFilms } from '../../store/action';
+import { resetCountFilms } from '../../store/site-process/site-process';
 
 
 function SmallFilmCard({
